@@ -11,11 +11,12 @@ class PhoneBook
     private:
         int contactCount;
         int index;
+        Contact contacts[8];
     public:
         PhoneBook();
         ~PhoneBook();
-        void add(Contact contactList[8]);
-        void search(Contact contactList[8]);
+        void add();
+        void search();
         void exitProgram();
         int getContactCount();
         void setContactCount(int contactCount);

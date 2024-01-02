@@ -59,7 +59,7 @@ void PhoneBook::loop(std::string *field, std::string prompt)
     }
 }
 
-void PhoneBook::add(Contact contactList[8])
+void PhoneBook::add()
 {
     std::string firstName;
     std::string lastName;
@@ -74,7 +74,7 @@ void PhoneBook::add(Contact contactList[8])
     loop(&nickName, "Nickname: ");
     loop(&phoneNumber, "Phone number: ");
     loop(&darkestSecret, "Darkest secret: ");
-    contactList[this->getIndex()] = Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
+    this->contacts[this->getIndex()] = Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
     if (this->getContactCount() != 8)
         this->setContactCount(this->getContactCount() + 1);
     this->setIndex(this->getIndex() + 1);
@@ -109,7 +109,7 @@ void PhoneBook::printContact(Contact contact)
     std::cout << "Darkest secret: " << contact.getContactDarkestSecret() << std::endl;
 }
 
-void PhoneBook::search(Contact contactList[8])
+void PhoneBook::search()
 {
     int i = 0;
     int indexToSearched;
@@ -122,9 +122,9 @@ void PhoneBook::search(Contact contactList[8])
     while (i < this->getContactCount())
     {
         std::cout << std::setw(10) << i + 1 << "|";
-        std::cout << std::setw(10) << truncateString(contactList[i].getContactFirstName()) << "|";
-        std::cout << std::setw(10) << truncateString(contactList[i].getContactLastName()) << "|";
-        std::cout << std::setw(10) << truncateString(contactList[i].getContactNickName()) << std::endl;
+        std::cout << std::setw(10) << truncateString(this->contacts[i].getContactFirstName()) << "|";
+        std::cout << std::setw(10) << truncateString(this->contacts[i].getContactLastName()) << "|";
+        std::cout << std::setw(10) << truncateString(this->contacts[i].getContactNickName()) << std::endl;
         i++;
     }
     std::cout << "---------------------------------------------" << std::endl;
@@ -147,7 +147,7 @@ void PhoneBook::search(Contact contactList[8])
         else
             std::cerr << "Index does not exist." << std::endl;
     }
-    this->printContact(contactList[indexToSearched - 1]);
+    this->printContact(this->contacts[indexToSearched - 1]);
     std::cin.ignore(32767, '\n');
 }
 
@@ -164,9 +164,9 @@ int main()
         std::cout << "Enter command: ";
         std::getline(std::cin, command);
         if (command == "ADD")
-            phoneBook.add(contactList);
+            phoneBook.add();
         else if (command == "SEARCH")
-            phoneBook.search(contactList);
+            phoneBook.search();
         else if (command == "EXIT")
             phoneBook.exitProgram();
         else if (std::cin.eof())
