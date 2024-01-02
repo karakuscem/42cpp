@@ -30,7 +30,7 @@ void PhoneBook::setIndex(int index)
     this->index = index;
 }
 
-int isNumber(std::string str)
+static int isNumber(std::string str)
 {
     int i = 0;
     while (str[i])
