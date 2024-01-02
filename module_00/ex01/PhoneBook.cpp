@@ -52,7 +52,6 @@ void PhoneBook::loop(std::string *field, std::string prompt)
             this->exitProgram();
         else if (field->empty())
             std::cout << "Field cannot be empty." << std::endl;
-        //check if promt is phone number and field is just digits
         else if (prompt == "Phone number: " && !isNumber(*field))
             std::cout << "Invalid phone number." << std::endl;
         else
