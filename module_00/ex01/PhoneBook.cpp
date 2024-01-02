@@ -51,9 +51,9 @@ void PhoneBook::loop(std::string *field, std::string prompt)
         if (std::cin.eof())
             this->exitProgram();
         else if (field->empty())
-            std::cout << "Field cannot be empty." << std::endl;
+            std::cerr << "Field cannot be empty." << std::endl;
         else if (prompt == "Phone number: " && !isNumber(*field))
-            std::cout << "Invalid phone number." << std::endl;
+            std::cerr << "Invalid phone number." << std::endl;
         else
             break ;
     }
@@ -138,14 +138,14 @@ void PhoneBook::search(Contact contactList[8])
                 this->exitProgram();
             std::cin.clear();
             std::cin.ignore(32767, '\n');
-            std::cout << "Invalid input." << std::endl;
+            std::cerr << "Invalid input." << std::endl;
         }
         else if (indexToSearched < 0 || indexToSearched > 8)
-            std::cout << "Index out of range." << std::endl;
+            std::cerr << "Index out of range." << std::endl;
         else if (indexToSearched > 0 && indexToSearched <= this->getContactCount())
             break ;
         else
-            std::cout << "Index does not exist." << std::endl;
+            std::cerr << "Index does not exist." << std::endl;
     }
     this->printContact(contactList[indexToSearched - 1]);
     std::cin.ignore(32767, '\n');
@@ -172,7 +172,7 @@ int main()
         else if (std::cin.eof())
             phoneBook.exitProgram();
         else
-            std::cout << "Invalid command." << std::endl;
+            std::cerr << "Invalid command." << std::endl;
     }
     return (0);
 }
