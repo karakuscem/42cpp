@@ -30,6 +30,18 @@ void PhoneBook::setIndex(int index)
     this->index = index;
 }
 
+int isNumber(std::string str)
+{
+    int i = 0;
+    while (str[i])
+    {
+        if (!isdigit(str[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 void PhoneBook::loop(std::string *field, std::string prompt)
 {
     while (1)
@@ -40,6 +52,9 @@ void PhoneBook::loop(std::string *field, std::string prompt)
             this->exitProgram();
         else if (field->empty())
             std::cout << "Field cannot be empty." << std::endl;
+        //check if promt is phone number and field is just digits
+        else if (prompt == "Phone number: " && !isNumber(*field))
+            std::cout << "Invalid phone number." << std::endl;
         else
             break ;
     }
